@@ -2,14 +2,14 @@
 
 public class Main : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static Main Instance { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
+    {
+        Instance = this;
+    }
+    
+    private void Update()
     {
         
     }

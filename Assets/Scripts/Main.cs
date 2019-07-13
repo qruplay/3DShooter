@@ -12,6 +12,7 @@ public class Main : MonoBehaviour
     public InputController inputController;
     public FlashlightController flashlightController;
     public SelectionController selectionController;
+    public WeaponController weaponController;
 
     private IInit[] _controllersToInit;
     private IUpdate[] _controllersToUpdate;
@@ -27,17 +28,19 @@ public class Main : MonoBehaviour
         inputController = new InputController();
         flashlightController = new FlashlightController();
         selectionController = new SelectionController();
+        weaponController = new WeaponController();
 
         _controllersToInit = new IInit[3];
         _controllersToInit[0] = inventory;
         _controllersToInit[1] = playerController;
         _controllersToInit[2] = inputController;
         
-        _controllersToUpdate = new IUpdate[4];
+        _controllersToUpdate = new IUpdate[5];
         _controllersToUpdate[0] = playerController;
         _controllersToUpdate[1] = inputController;
         _controllersToUpdate[2] = flashlightController;
         _controllersToUpdate[3] = selectionController;
+        _controllersToUpdate[4] = weaponController;
     }
 
     private void Start()

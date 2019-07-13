@@ -6,6 +6,7 @@ namespace View
     {
         private FlashLightUi _flashLightUi;
         private SelectionUi _selectionUi;
+        private WeaponUi _weaponUi;
 
         public FlashLightUi FlashLightUi
         {
@@ -22,6 +23,16 @@ namespace View
             { 
                 if (!_selectionUi) _selectionUi = Object.FindObjectOfType<SelectionUi>();
                 return _selectionUi;
+            }
+        }
+        
+        public WeaponUi WeaponUi
+        {
+            get
+            {
+                if (!_weaponUi)
+                    _weaponUi = Object.FindObjectOfType<WeaponUi>();
+                return _weaponUi;
             }
         }
     }

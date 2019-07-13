@@ -72,14 +72,20 @@ namespace Model
             set
             {
                 _isVisible = value;
-                var tempRenderer = GetComponent<Renderer>();
-                if (tempRenderer) tempRenderer.enabled = _isVisible;
-                if (transform.childCount <= 0) return;
-                foreach (Transform d in transform)
-                {
-                    tempRenderer = d.gameObject.GetComponent<Renderer>();
-                    if (tempRenderer) tempRenderer.enabled = _isVisible;
-                }
+                Debug.Log("here");
+                SetVisibility(Transform, _isVisible);
+            }
+        }
+
+        private void SetVisibility(Transform obj, bool value)
+        {
+            var tempRenderer = obj.GetComponent<Renderer>();
+            if (tempRenderer) tempRenderer.enabled = value;
+            if (obj.transform.childCount <= 0) return;
+            foreach (Transform d in obj.transform)
+            {
+                Debug.Log(obj.transform.gameObject.name);
+                SetVisibility(d, value);
             }
         }
         

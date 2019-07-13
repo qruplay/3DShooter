@@ -72,7 +72,6 @@ namespace Model
             set
             {
                 _isVisible = value;
-                Debug.Log("here");
                 SetVisibility(Transform, _isVisible);
             }
         }
@@ -84,7 +83,6 @@ namespace Model
             if (obj.transform.childCount <= 0) return;
             foreach (Transform d in obj.transform)
             {
-                Debug.Log(obj.transform.gameObject.name);
                 SetVisibility(d, value);
             }
         }

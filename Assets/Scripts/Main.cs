@@ -1,18 +1,21 @@
 ﻿using Controller;
 using Interface;
 using Model;
+using Model.Weapon;
 using UnityEngine;
+// ReSharper disable InconsistentNaming
 
 public class Main : MonoBehaviour
 {
     public static Main Instance { get; private set; }
     public Transform Player { get; private set; }
-    public PlayerController playerController;
-    public Inventory inventory;
-    public InputController inputController;
-    public FlashlightController flashlightController;
-    public SelectionController selectionController;
-    public WeaponController weaponController;
+    public PlayerController PlayerController;
+    public Inventory Inventory;
+    public InputController InputController;
+    public FlashlightController FlashlightController;
+    public SelectionController SelectionController;
+    public WeaponController WeaponController;
+    public ObjectPool ObjectPool;
 
     private IInit[] _controllersToInit;
     private IUpdate[] _controllersToUpdate;
@@ -23,24 +26,27 @@ public class Main : MonoBehaviour
 
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         
-        inventory = new Inventory();
-        playerController = new PlayerController(new UnitMotor(Player));
-        inputController = new InputController();
-        flashlightController = new FlashlightController();
-        selectionController = new SelectionController();
-        weaponController = new WeaponController();
+        Inventory = new Inventory();
+        PlayerController = new PlayerController(new UnitMotor(Player));
+        InputController = new InputController();
+        FlashlightController = new FlashlightController();
+        SelectionController = new SelectionController();
+        WeaponController = new WeaponController();
+        ObjectPool = new ObjectPool();
 
         _controllersToInit = new IInit[3];
-        _controllersToInit[0] = inventory;
-        _controllersToInit[1] = playerController;
-        _controllersToInit[2] = inputController;
+        _controllersToInit[0] = Inventory;
+        _controllersToInit[1] = PlayerController;
+        _controllersToInit[2] = InputController;
         
         _controllersToUpdate = new IUpdate[5];
-        _controllersToUpdate[0] = playerController;
-        _controllersToUpdate[1] = inputController;
-        _controllersToUpdate[2] = flashlightController;
-        _controllersToUpdate[3] = selectionController;
-        _controllersToUpdate[4] = weaponController;
+        _controllersToUpdate[0] = PlayerController;
+        _controllersToUpdate[1] = InputController;
+        _controllersToUpdate[2] = FlashlightController;
+        _controllersToUpdate[3] = SelectionController;
+        _controllersToUpdate[4] = WeaponController;
+        
+        PrepareObjectPools();
     }
 
     private void Start()
@@ -57,5 +63,12 @@ public class Main : MonoBehaviour
         {
             controllerToUpdate.OnUpdate();
         }
+    }
+
+    private void PrepareObjectPools()
+    {
+        var bulletsPollParent = GameObject.Find("Bullet");
+        var bulletPrefab = Resources.Load<Bullet>("Bullet");
+        ObjectPool.AddPool("Bullet", bulletPrefab, 100, bulletsPollParent.transform);
     }
 }

@@ -26,12 +26,12 @@ namespace Controller
             if (!IsActive) return;
             if (Input.GetKeyDown(_switchFlashLight))
             {
-                Main.Instance.flashlightController.Switch();
+                Main.Instance.FlashlightController.Switch();
             }
             
             if (Input.GetKeyDown(_reloadClip))
             {
-                Main.Instance.weaponController.ReloadClip();
+                Main.Instance.WeaponController.ReloadClip();
             }
             
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -52,22 +52,22 @@ namespace Controller
         
         private void MouseScroll(MouseScrollWheel value)
         {
-            var tempWeapon = Main.Instance.inventory.SelectWeapon(value);
+            var tempWeapon = Main.Instance.Inventory.SelectWeapon(value);
             SelectWeapon(tempWeapon);
         }
         
         private void SelectWeapon(int value)
         {
-            var tempWeapon = Main.Instance.inventory.SelectWeapon(value);
+            var tempWeapon = Main.Instance.Inventory.SelectWeapon(value);
             SelectWeapon(tempWeapon);
         }
         
         private void SelectWeapon(BaseWeapon weapon)
         {
-            Main.Instance.weaponController.Off();
+            Main.Instance.WeaponController.Off();
             if (weapon != null)
             {
-                Main.Instance.weaponController.On(weapon);
+                Main.Instance.WeaponController.On(weapon);
             }
         }
     }

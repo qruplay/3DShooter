@@ -8,20 +8,23 @@ namespace Model.Weapon
         [SerializeField] protected float lifetime = 10;
         [SerializeField] protected float baseDamage = 10;
         protected float Damage;
-        protected float LossOfDamageByTime = 0.2f;
+        protected float DamageLossOverTime = 0.2f;
 
         public AmmunitionType type = AmmunitionType.Bullet;
 
-        protected override void Awake()
+        public void GetReadyToFire(Vector3 fireDir, Vector3 pos, Quaternion rotation)
         {
-            base.Awake();
+            AddForce(fireDir);
+            Transform.position = pos;
+            Transform.rotation = rotation;
             Damage = baseDamage;
+            InvokeRepeating(nameof(LoseDamage), 0, 1);
+            Invoke(nameof(ReturnToPool), lifetime);
         }
 
-        private void Start()
+        protected void ReturnToPool()
         {
-            Destroy(gameObject, lifetime);
-            InvokeRepeating(nameof(LoseDamage), 0, 1);
+            Main.Instance.ObjectPool.AddObjectToPool("Bullet", this);
         }
 
         public void AddForce(Vector3 dir)
@@ -31,7 +34,7 @@ namespace Model.Weapon
 
         protected void LoseDamage()
         {
-            Damage -= LossOfDamageByTime;
+            Damage -= DamageLossOverTime;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Model.Weapon
                 hitObject.SetDamage(new CollisionInfo(Damage, collision.contacts[0], collision.transform,
                     Rigidbody.velocity));
 
-            Destroy(gameObject);
+            Main.Instance.ObjectPool.AddObjectToPool("Bullets", this);
         }
     }
 }

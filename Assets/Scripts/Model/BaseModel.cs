@@ -89,15 +89,20 @@ namespace Model
         
         public bool HasRigidBody() => Rigidbody;
 
-        public void DisableRigidbody()
+        public void SetRigidBodyActive(bool value)
         {
             if (!HasRigidBody()) return;
 
             var rigidbodies = GetComponentsInChildren<Rigidbody>();
             foreach (var rb in rigidbodies)
             {
-                rb.isKinematic = true;
+                rb.isKinematic = value;
             }
+        }
+        
+        public void DisableRigidbody()
+        {
+            SetRigidBodyActive(false);
         }
         
         public void EnableRigidbody(float force)
@@ -108,13 +113,7 @@ namespace Model
 
         public void EnableRigidbody()
         {
-            if (!HasRigidBody()) return;
-
-            var rigidbodies = GetComponentsInChildren<Rigidbody>();
-            foreach (var rb in rigidbodies)
-            {
-                rb.isKinematic = false;
-            }
+            SetRigidBodyActive(true);
         }
         
         public void ConstraintsRigidbody (RigidbodyConstraints rigidbodyConstraints)

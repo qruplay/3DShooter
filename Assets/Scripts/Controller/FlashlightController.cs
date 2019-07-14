@@ -32,7 +32,7 @@ namespace Controller
         {
             if (IsActive) return;
             base.On();
-            _flashLight = Main.Instance.inventory.FlashLight;
+            _flashLight = Main.Instance.Inventory.FlashLight;
             _flashLight.Switch(true);
         }
 
@@ -40,13 +40,13 @@ namespace Controller
         {
             if (!IsActive) return;
             base.Off();
-            _flashLight = Main.Instance.inventory.FlashLight;
+            _flashLight = Main.Instance.Inventory.FlashLight;
             _flashLight.Switch(false);
         }
 
         private void UpdateFlashLightUi()
         {
-            _flashLight = Main.Instance.inventory.FlashLight;
+            _flashLight = Main.Instance.Inventory.FlashLight;
             var chargeAmount = _flashLight.GetBatteryChargeInPercent();
 
             UiInterface.FlashLightUi.Energy = chargeAmount;

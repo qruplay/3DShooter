@@ -17,9 +17,8 @@ namespace Model.Weapon
             if (!CanFire) return;
             if (clip.AmmunitionCount <= 0) return;
             if (!Ammunition) return;
-            // TODO: replace Instantiate with objects pool
-            var tempAmmunition = Instantiate(Ammunition, firePosition.position, firePosition.rotation);
-            tempAmmunition.AddForce(firePosition.forward * fireForce);
+            var tempAmmunition = (Bullet)Main.Instance.ObjectPool.GetObjectFromPool("Bullet");
+            tempAmmunition.GetReadyToFire(firePosition.forward * fireForce, firePosition.position, firePosition.rotation);
             clip.AmmunitionCount--;
             CanFire = false;
             Invoke(SetFireAvailable, rechargeTime);

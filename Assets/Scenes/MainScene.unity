@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePosition: {fileID: 1001875820}
-  fireForce: 10000
+  fireForce: 400
   rechargeTime: 0.4
 --- !u!1 &185488596
 GameObject:
@@ -2457,7 +2457,7 @@ PrefabInstance:
     - target: {fileID: 5324926816216671561, guid: c31f5422edc19404ab7c319f206e60e4,
         type: 3}
       propertyPath: fireForce
-      value: 10000
+      value: 400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c31f5422edc19404ab7c319f206e60e4, type: 3}

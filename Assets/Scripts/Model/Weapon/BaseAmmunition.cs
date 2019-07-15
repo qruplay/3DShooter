@@ -5,7 +5,7 @@ namespace Model.Weapon
 {
     public class BaseAmmunition : BaseModel
     {
-        [SerializeField] protected float lifetime = 10;
+        [SerializeField] protected float lifetime = 2;
         [SerializeField] protected float baseDamage = 10;
         protected float Damage;
         protected float DamageLossOverTime = 0.2f;

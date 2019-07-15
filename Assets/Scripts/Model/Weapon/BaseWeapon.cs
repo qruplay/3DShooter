@@ -5,9 +5,9 @@ namespace Model.Weapon
 {
     public abstract class BaseWeapon : BaseModel
     {
-        protected int MaxAmmunitionCount = 30;
-        protected int ClipCount = 5;
-        
+        protected abstract int MaxAmmunitionCount { get; }
+        protected abstract int ClipCount { get; }
+
         public BaseAmmunition Ammunition { get; protected set; }
         public Clip clip;
 
@@ -23,8 +23,17 @@ namespace Model.Weapon
         {
             InitClips();
         }
-        
-        public abstract void Fire();
+
+        public virtual void Fire()
+        {
+            if (!CanFire) return;
+            if (clip.AmmunitionCount <= 0) return;
+            var tempAmmunition = (Bullet)Main.Instance.ObjectPool.GetObjectFromPool("Bullet");
+            tempAmmunition.GetReadyToFire(firePosition.forward * fireForce, firePosition.position, firePosition.rotation);
+            clip.AmmunitionCount--;
+            CanFire = false;
+            Invoke(nameof(SetFireAvailable), rechargeTime);
+        }
 
         protected void SetFireAvailable()
         {

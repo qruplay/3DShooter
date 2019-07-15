@@ -4,5 +4,6 @@ namespace Model.Weapon
     {
         protected override int MaxAmmunitionCount => 12;
         protected override int ClipCount => 6;
+        
     }
 }

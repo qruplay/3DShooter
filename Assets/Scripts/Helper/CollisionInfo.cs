@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Interface
+namespace Helper
 {
     public struct CollisionInfo
     {

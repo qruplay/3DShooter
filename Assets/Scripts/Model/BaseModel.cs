@@ -131,6 +131,11 @@ namespace Model
 
             var tempCollider = GetComponent<Collider>();
             if (tempCollider) tempCollider.enabled = value;
+            
+            // TODO: !!!!!!!
+            // Не могу отключить физику (IsKinematic = false), пока стоит Colision Detection = Continuous Dynamic
+            // При этом никак не могу придумать, куда сохранять состояние Colision Detection перед отключением физики
+            // SetRigidBodyActive(value);
         }
     }
 }
